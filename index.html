@@ -1,7 +1,6 @@
-
 <html>
 <head>
-  <!-- Basic HTML Setup -->
+  <!-- Basic HTML Setup DO NOT REMOVE IT WILL COLLAPES MOBILE VIEW -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Paragatos Portfolio</title>
@@ -9,22 +8,29 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="./assests/lplogo.png" />
 
-  <!-- External CSS -->
+  <!-- CSS -->
   <link rel="stylesheet" href="./css/index.css" />
 </head>
+
 <body>
-      <div class="aurora"></div>
+  <!-- ==== Preloader ==== -->
+  <div id="preloader">
+    <div class="loader-container">
+      <img src="./assests/lplogo.png" alt="Logo" class="loader-logo">
+      <div class="loader-ring"></div>
+    </div>
+  </div>
+
+  <div class="aurora"></div>
+
   <!-- ==== Banner/Navbar Section ==== -->
   <header class="banner">
-    <!-- Logo on the left side -->
     <div class="logo">
       <img src="./assests/lplogo.png" alt="Logo" />
     </div>
 
-    <!-- Hamburger icon for mobile menu -->
     <div class="hamburger" id="hamburger">&#9776;</div>
 
-    <!-- Navigation Links -->
     <nav class="links" id="nav-links">
       <a href="#about-me" class="link-about-me">About Me</a>
       <a href="#portfolio" class="link-portfolio">Education & Experiences</a>
@@ -39,22 +45,18 @@
   <div class="form-wrapper">
 
     <!-- ==== About Me Section ==== -->
-    <div id="about-me" class="section about-layout">
-      <!-- Photo on the left side -->
+    <div id="about-me" class="section about-layout reveal">
       <div class="about-photo">
         <img src="./assests/myPhoto.png" alt="My Photo" />
       </div>
 
-      <!-- Text and social icons on the right -->
       <div class="about-text">
         <h2>Hi I'm Liybie</h2>
 
-        <!-- Typewriter animation for roles -->
         <div class="typewriter-container">
           <span class="typewriter-text" id="typewriter"></span>
         </div>
 
-        <!-- Social media icons -->
         <div class="social-icons">
           <a href="https://www.linkedin.com/in/liybie-paragatos-0a14b32b9/" target="_blank">
             <img src="./assests/linkedin.png" alt="LinkedIn" />
@@ -73,15 +75,12 @@
     </div>
 
     <!-- ==== Portfolio Section (Education & Experience) ==== -->
-    <div id="portfolio" class="section">
-      
+    <div id="portfolio" class="section reveal">
       <div class="timeline">
-        
-        <!-- --- Education --- -->
-        <div class="timeline-separator">Educational Background</div>
 
-        <!-- SHS Info -->
-        <div class="timeline-block">
+        <div class="timeline-separator reveal">Educational Background</div>
+
+        <div class="timeline-block reveal">
           <div class="timeline-content">
             <h3>Senior High School</h3>
             <p><strong>School:</strong> Jesus Dela Peña National High School</p>
@@ -91,8 +90,7 @@
           </div>
         </div>
 
-        <!-- College Info -->
-        <div class="timeline-block">
+        <div class="timeline-block reveal">
           <div class="timeline-content">
             <h3>College</h3>
             <p><strong>School:</strong> National University Manila</p>
@@ -102,21 +100,18 @@
           </div>
         </div>
 
-        <!-- --- Experience --- -->
-        <div class="timeline-separator">Experiences</div>
+        <div class="timeline-separator reveal">Experiences</div>
 
-        <!-- Freelance Editor -->
-        <div class="timeline-block">
+        <div class="timeline-block reveal">
           <div class="timeline-content">
             <h3>Freelance Editor</h3>
             <p><strong>Type:</strong> Self-employed</p>
             <p><strong>Role:</strong> Remote video editing and content polishing for clients</p>
-            <span class="timeline-date">Jul 2020 – 2021 </span>
+            <span class="timeline-date">Jul 2020 – Present</span>
           </div>
         </div>
 
-        <!-- Internship -->
-        <div class="timeline-block">
+        <div class="timeline-block reveal">
           <div class="timeline-content">
             <h3>Student Trainee – Internship</h3>
             <p><strong>Company:</strong> Digital Arts Technology Training Center Inc.</p>
@@ -126,8 +121,7 @@
           </div>
         </div>
 
-        <!-- Ateneo NSTP -->
-        <div class="timeline-block">
+        <div class="timeline-block reveal">
           <div class="timeline-content">
             <h3>Student Participant – Ateneo NSTP</h3>
             <p><strong>Institution:</strong> Ateneo de Manila University</p>
@@ -139,58 +133,57 @@
     </div>
 
     <!-- ==== Projects Section ==== -->
-             <div class="timeline-separator">Projects</div>
-    <div id="projects-list" class="section">
-      
+    <div class="timeline-separator reveal">Projects</div>
+    <div id="projects-list" class="section reveal">
       <div class="projects-list">
-        <!-- Project cards -->
-         
-<a href="https://www.figma.com/proto/3hrLGAWJG6sVgB401ISKnb/Medelink?node-id=1-2&starting-point-node-id=1%3A2" target="_blank" class="project-box">
-  <img src="./assests/medilink.png" alt="Medilink Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
-  <h3>Medilink</h3>
-  <p>UI/UX prototype Figma design for a health service app developed for a hackathon entry.</p>
-</a>
-
-<a href="https://github.com/Liybie/Simple-Dental-Management-System/tree/main" target="_blank" class="project-box">
-  <img src="./assests/dentassist.png" alt="DentAssist Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
-  <h3>DentAssist</h3>
-  <p>A simple dental management system with patient tracking and appointment management developed by our group Xnovators.</p>
-</a>
-
-<a href="https://liybie.github.io/TECHCORE/" target="_blank" class="project-box">
-  <img src="./assests/techcore.png" alt="TechCore Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
-  <h3>TechCore</h3>
-  <p>An informative simple website explaining the components of computer hardware.</p>
-</a>
-<a href="#" class="project-box">
-  <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
-  <h3>Upcoming Project</h3>
-  <p>This project is currently in development. More details coming soon.</p>
-</a>
-
-<a href="#" class="project-box">
-  <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
-  <h3>Upcoming Project</h3>
-  <p>This project is currently in development. More details coming soon.</p>
-</a>
-
-<a href="#" class="project-box">
-  <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
-  <h3>Upcoming Project</h3>
-  <p>This project is currently in development. More details coming soon.</p>
-</a>
-
         
+        <a href="https://www.figma.com/proto/3hrLGAWJG6sVgB401ISKnb/Medelink?node-id=1-2&starting-point-node-id=1%3A2" target="_blank" class="project-box reveal">
+          <img src="./assests/medilink.png" alt="Medilink Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+          <h3>Medilink</h3>
+          <p>UI/UX prototype Figma design for a health service app developed for a hackathon entry.</p>
+        </a>
+
+        <a href="https://github.com/Liybie/Simple-Dental-Management-System/tree/main" target="_blank" class="project-box reveal">
+          <img src="./assests/dentassist.png" alt="DentAssist Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+          <h3>DentAssist</h3>
+          <p>A simple dental management system with patient tracking and appointment management developed by our group Xnovators.</p>
+        </a>
+
+        <a href="https://liybie.github.io/TECHCORE/" target="_blank" class="project-box reveal">
+          <img src="./assests/techcore.png" alt="TechCore Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+          <h3>TechCore</h3>
+          <p>An informative simple website explaining the components of computer hardware.</p>
+        </a>
+
+        <a href="#" class="project-box reveal">
+          <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+          <h3>Upcoming Project</h3>
+          <p>This project is currently in development. More details coming soon.</p>
+        </a>
+
+        <a href="#" class="project-box reveal">
+          <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+          <h3>Upcoming Project</h3>
+          <p>This project is currently in development. More details coming soon.</p>
+        </a>
+
+        <a href="#" class="project-box reveal">
+          <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+          <h3>Upcoming Project</h3>
+          <p>This project is currently in development. More details coming soon.</p>
+        </a>
+
       </div>
     </div>
 
-  <!-- ==== External JavaScript ==== -->
-  <script src="./js/index.js"></script>
+    <!-- ==== Footer ==== -->
+    <footer class="footer">
+      <p>&copy; 2025 Liybie R. Paragatos. All rights reserved.</p>
+    </footer>
+  </div>
 
-  <!-- ==== Footer ==== -->
-  <footer class="footer">
-    <p>&copy; 2025 Liybie R. Paragatos. All rights reserved.</p>
-  </footer>
+  <!-- ====  JavaScript ==== -->
+  <script src="./js/index.js"></script>
 
 </body>
 </html>
