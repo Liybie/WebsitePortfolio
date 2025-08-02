@@ -87,3 +87,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start the typewriter animation
     type();
 });
+// === Hide preloader after page load ===
+window.addEventListener('load', () => {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    preloader.classList.add('hidden');
+  }
+});
+// ==== Scroll Reveal Animation ====
+document.addEventListener("DOMContentLoaded", () => {
+  const reveals = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target); // optional: remove if you want repeat on scroll
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  reveals.forEach(reveal => {
+    observer.observe(reveal);
+  });
+});
