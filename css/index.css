@@ -1,25 +1,25 @@
-/* ========== MY BASE STYLES FOR DEISIGN ========== */
+/* ========== RESET & BASE STYLES ========== */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Ensures padding and borders are included in element width/height */
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* Smooth scrolling for anchor navigation */
 }
 
 body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #070829 0%, #1a1a3d 50%, #070829 100%);
-  background-attachment: fixed;
-  color: #fff;
-  overflow-x: hidden;
+  font-family: 'Segoe UI', sans-serif; /* Sets modern sans-serif font */
+  background: linear-gradient(135deg, #070829 0%, #1a1a3d 50%, #070829 100%); /* Dark gradient background */
+  background-attachment: fixed; /* Keeps background fixed during scroll */
+  color: #fff; /* Default font color */
+  overflow-x: hidden; /* Prevents horizontal scroll */
 }
 
 /* ========== AURORA BACKGROUND ========== */
 .aurora {
-  position: fixed;
+  position: fixed; /* Covers entire screen */
   top: 0;
   left: 0;
   width: 100vw;
@@ -31,12 +31,12 @@ body {
     rgba(180, 210, 255, 0.12),
     rgba(100, 160, 255, 0.09),
     rgba(10, 20, 40, 0.4)
-  );
+  ); /* Aurora color gradients */
   background-size: 400% 400%;
-  animation: aurora 15s ease infinite;
-  z-index: -1;
-  pointer-events: none;
-  mix-blend-mode: screen;
+  animation: aurora 15s ease infinite; /* Animates the background flow */
+  z-index: -1; /* Places behind all content */
+  pointer-events: none; /* Makes background non-interactive */
+  mix-blend-mode: screen; /* Adds glow effect */
 }
 
 @keyframes aurora {
@@ -44,24 +44,24 @@ body {
   50% { background-position: 100% 100%; }
 }
 
-/* ========== BANNER / NAVIGATION ========== */
+/* ========== BANNER ========== */
 .banner {
-  position: sticky;
+  position: sticky; /* Sticks to top of page */
   top: 0;
   z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #070829;
+  background: #070829; /* Dark header */
   padding: 12px 24px;
-  border-bottom: 3px solid #EBBD33;
-  opacity: 0.95;
+  border-bottom: 3px solid #EBBD33; /* Gold border */
+  opacity: 0.95; /* Slight transparency */
   flex-wrap: wrap;
 }
 
 .logo {
   order: 1;
-  margin-left: 200px;
+  margin-left: 350px; /* Pushes logo to the left */
 }
 
 .logo img {
@@ -71,7 +71,7 @@ body {
 .hamburger {
   font-size: 28px;
   color: white;
-  display: none;
+  display: none; /* Hidden on desktop */
   cursor: pointer;
   margin-left: auto;
   order: 2;
@@ -95,7 +95,7 @@ body {
 
 .links a:hover,
 .links a.active {
-  color: #EBBD33;
+  color: #EBBD33; /* Highlight on hover/active */
 }
 
 .links a::after {
@@ -105,14 +105,14 @@ body {
   left: 0;
   width: 100%;
   height: 2px;
-  background: #EBBD33;
-  transform: scaleX(0);
+  background: #EBBD33; /* Gold underline */
+  transform: scaleX(0); /* Initially hidden */
   transform-origin: right;
   transition: transform 0.3s;
 }
 
 .links a:hover::after {
-  transform: scaleX(1);
+  transform: scaleX(1); /* Expands underline */
   transform-origin: left;
 }
 
@@ -121,11 +121,11 @@ body {
   position: relative;
   width: 100vw;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(16px);
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  backdrop-filter: blur(16px); /* Background blur effect */
   border-top: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.6);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.6); /* Inset shadow for depth */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -138,7 +138,7 @@ body {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  scroll-margin-top: 80px;
+  scroll-margin-top: 80px; /* Prevents section from hiding under fixed banner */
 }
 
 /* ========== ABOUT ME SECTION ========== */
@@ -156,10 +156,10 @@ body {
 .about-photo img {
   width: 240px;
   height: 240px;
-  border-radius: 50%;
+  border-radius: 50%; /* Makes image circular */
   border: 4px solid #EBBD33;
   box-shadow: 0 0 25px rgba(235, 189, 51, 0.3);
-  object-fit: cover;
+  object-fit: cover; /* Ensures image fits inside frame */
   transition: transform 0.3s;
 }
 
@@ -187,7 +187,7 @@ body {
   width: 2px;
   height: 1.2rem;
   background-color: #EBBD33;
-  animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite; /* Blinking cursor effect */
   margin-left: 2px;
 }
 
@@ -201,7 +201,7 @@ body {
   position: relative;
   margin: 40px 90px;
   padding-left: 30px;
-  border-left: 3px solid #EBBD33;
+  border-left: 3px solid #EBBD33; /* Timeline vertical line */
 }
 
 .timeline-block {
@@ -420,4 +420,61 @@ body {
   .timeline-content {
     padding: 12px;
   }
+}
+
+/* Spinner animation keyframe */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========  PRELOADER ========== */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #070829;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loader-logo {
+  width: 64px;
+  height: 64px;
+  z-index: 2;
+  animation: pop-in 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Scroll Reveal Animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.6s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
