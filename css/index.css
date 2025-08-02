@@ -61,7 +61,7 @@ body {
 
 .logo {
   order: 1;
-  margin-left: 350px; /* Pushes logo to the left */
+  margin-left: 20%; /* Pushes logo to the left */
 }
 
 .logo img {
@@ -478,3 +478,4 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
