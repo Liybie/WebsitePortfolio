@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // === Section highlighting on scroll ===
-    const sections = document.querySelectorAll('div.section');
+    const sections = document.querySelectorAll('.section');
     const links = document.querySelectorAll('.links a');
 
     // Updates active link based on scroll position
@@ -18,29 +18,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initialize the highlighting on page load
-    changeLinkState();
-    // Update highlighting as the user scrolls
-    window.addEventListener('scroll', changeLinkState);
+    // === Navigation elements ===
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('nav-links');
+
+    // === Back to top button ===
+    const backToTop = document.getElementById('back-to-top');
+
+    // Combined scroll handler, throttled with requestAnimationFrame
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                changeLinkState();
+                if (backToTop) {
+                    backToTop.classList.toggle('show', window.scrollY > 400);
+                }
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    // Initialize on page load and listen for scroll
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
     // === Smooth scroll for anchor links ===
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', e => {
+            const targetId = anchor.getAttribute('href');
+            if (targetId === '#') return;
+            const target = document.querySelector(targetId);
+            if (!target) return;
             e.preventDefault();
             // Scroll smoothly to the section
-            document.querySelector(anchor.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            target.scrollIntoView({ behavior: 'smooth' });
+            // Close the mobile menu after navigating
+            navLinks.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
         });
     });
 
     // === Hamburger menu toggle for mobile navigation ===
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.getElementById('nav-links');
-
     // Toggle mobile nav visibility on hamburger click
     hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('open');
+        const isOpen = navLinks.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', String(isOpen));
     });
 
     // === Typewriter effect for dynamic text ===
