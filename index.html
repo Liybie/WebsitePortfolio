@@ -1,9 +1,21 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <!-- Basic HTML Setup DO NOT REMOVE IT WILL COLLAPES MOBILE VIEW -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paragatos Portfolio</title>
+  <title>Liybie Paragatos | Aspiring Full Stack Developer</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Portfolio of Liybie R. Paragatos, an aspiring full stack developer and BSIT student specializing in mobile and web application development." />
+  <meta name="author" content="Liybie R. Paragatos" />
+  <meta name="theme-color" content="#070829" />
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Liybie Paragatos | Aspiring Full Stack Developer" />
+  <meta property="og:description" content="Portfolio of Liybie R. Paragatos, an aspiring full stack developer and BSIT student." />
+  <meta property="og:image" content="./assests/myPhoto.png" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="./assests/lplogo.png" />
@@ -13,6 +25,9 @@
 </head>
 
 <body>
+  <!-- ==== Skip Link (accessibility) ==== -->
+  <a href="#about-me" class="skip-link">Skip to content</a>
+
   <!-- ==== Preloader ==== -->
   <div id="preloader">
     <div class="loader-container">
@@ -21,61 +36,72 @@
     </div>
   </div>
 
+  <!-- ==== Aurora Background ==== -->
   <div class="aurora"></div>
 
   <!-- ==== Banner/Navbar Section ==== -->
   <header class="banner">
     <div class="logo">
-      <img src="./assests/lplogo.png" alt="Logo" />
+      <a href="#about-me" aria-label="Back to top">
+        <img src="./assests/lplogo.png" alt="Liybie Paragatos logo" />
+      </a>
     </div>
 
-    <div class="hamburger" id="hamburger">&#9776;</div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
 
-    <nav class="links" id="nav-links">
+    <nav class="links" id="nav-links" aria-label="Primary">
       <a href="#about-me" class="link-about-me">About Me</a>
-      <a href="#portfolio" class="link-portfolio">Education & Experiences</a>
+      <a href="#portfolio" class="link-portfolio">Education &amp; Experiences</a>
       <a href="#projects-list" class="link-experience">Projects</a>
     </nav>
   </header>
 
-  <!-- ==== Aurora Background ==== -->
-  <div class="aurora"></div>
-
   <!-- ==== Main Content Wrapper ==== -->
-  <div class="form-wrapper">
+  <main class="form-wrapper">
 
     <!-- ==== About Me Section ==== -->
-    <div id="about-me" class="section about-layout reveal">
+    <section id="about-me" class="section about-layout reveal">
       <div class="about-photo">
-        <img src="./assests/myPhoto.png" alt="My Photo" />
+        <img src="./assests/myPhoto.png" alt="Portrait of Liybie Paragatos" />
       </div>
 
       <div class="about-text">
-        <h2>Hi I'm Liybie</h2>
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-name">Liybie Paragatos</h1>
 
         <div class="typewriter-container">
           <span class="typewriter-text" id="typewriter"></span>
         </div>
 
+        <p class="hero-bio">
+          A BSIT student passionate about building clean, user-friendly web and mobile
+          applications &mdash; from backend logic to thoughtful UI/UX.
+        </p>
+
+        <div class="hero-cta">
+          <a href="#projects-list" class="btn btn-primary">View My Work</a>
+          <a href="mailto:paragatosliybie@gmail.com" class="btn btn-secondary">Get in Touch</a>
+        </div>
+
         <div class="social-icons">
-          <a href="https://www.linkedin.com/in/liybie-paragatos-0a14b32b9/" target="_blank">
-            <img src="./assests/linkedin.png" alt="LinkedIn" />
+          <a href="https://www.linkedin.com/in/liybie-paragatos-0a14b32b9/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <img src="./assests/linkedin.png" alt="" />
           </a>
-          <a href="mailto:paragatosliybie@gmail.com">
-            <img src="./assests/email.png" alt="Email" />
+          <a href="mailto:paragatosliybie@gmail.com" aria-label="Email">
+            <img src="./assests/email.png" alt="" />
           </a>
-          <a href="https://github.com/Liybie" target="_blank">
-            <img src="./assests/github.png" alt="GitHub" />
+          <a href="https://github.com/Liybie" target="_blank" rel="noopener" aria-label="GitHub">
+            <img src="./assests/github.png" alt="" />
           </a>
-          <a href="https://www.facebook.com/Liybie.Paragatos.R" target="_blank">
-            <img src="./assests/facebook.png" alt="Facebook" />
+          <a href="https://www.facebook.com/Liybie.Paragatos.R" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="./assests/facebook.png" alt="" />
           </a>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- ==== Portfolio Section (Education & Experience) ==== -->
-    <div id="portfolio" class="section reveal">
+    <section id="portfolio" class="section reveal">
       <div class="timeline">
 
         <div class="timeline-separator reveal">Educational Background</div>
@@ -130,62 +156,81 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- ==== Projects Section ==== -->
-   
-    <div id="projects-list" class="section reveal">
-       <div class="timeline-separator reveal">Projects</div>
+    <section id="projects-list" class="section reveal">
+      <div class="timeline-separator reveal">Projects</div>
       <div class="projects-list">
-        
-        <a href="https://www.figma.com/proto/3hrLGAWJG6sVgB401ISKnb/Medelink?node-id=1-2&starting-point-node-id=1%3A2" target="_blank" class="project-box reveal">
-          <img src="./assests/medilink.png" alt="Medilink Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+
+        <a href="https://www.figma.com/proto/3hrLGAWJG6sVgB401ISKnb/Medelink?node-id=1-2&starting-point-node-id=1%3A2" target="_blank" rel="noopener" class="project-box reveal">
+          <div class="project-thumb">
+            <img src="./assests/medilink.png" alt="Medilink project screenshot" loading="lazy">
+          </div>
           <h3>Medilink</h3>
           <p>UI/UX prototype Figma design for a health service app developed for a hackathon entry.</p>
+          <span class="project-link">View prototype &rarr;</span>
         </a>
 
-        <a href="https://github.com/Liybie/Simple-Dental-Management-System/tree/main" target="_blank" class="project-box reveal">
-          <img src="./assests/dentassist.png" alt="DentAssist Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+        <a href="https://github.com/Liybie/Simple-Dental-Management-System/tree/main" target="_blank" rel="noopener" class="project-box reveal">
+          <div class="project-thumb">
+            <img src="./assests/dentassist.png" alt="DentAssist project screenshot" loading="lazy">
+          </div>
           <h3>DentAssist</h3>
           <p>A simple dental management system with patient tracking and appointment management developed by our group Xnovators.</p>
+          <span class="project-link">View on GitHub &rarr;</span>
         </a>
 
-        <a href="https://liybie.github.io/TECHCORE/" target="_blank" class="project-box reveal">
-          <img src="./assests/techcore.png" alt="TechCore Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+        <a href="https://liybie.github.io/TECHCORE/" target="_blank" rel="noopener" class="project-box reveal">
+          <div class="project-thumb">
+            <img src="./assests/techcore.png" alt="TechCore project screenshot" loading="lazy">
+          </div>
           <h3>TechCore</h3>
           <p>An informative simple website explaining the components of computer hardware.</p>
+          <span class="project-link">Visit site &rarr;</span>
         </a>
 
-        <a href="#" class="project-box reveal">
-          <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+        <div class="project-box project-box--upcoming reveal" aria-disabled="true">
+          <div class="project-thumb">
+            <img src="./assests/titlecard.png" alt="Upcoming project placeholder" loading="lazy">
+          </div>
           <h3>Upcoming Project</h3>
           <p>This project is currently in development. More details coming soon.</p>
-        </a>
+          <span class="project-link project-link--muted">Coming soon</span>
+        </div>
 
-        <a href="#" class="project-box reveal">
-          <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+        <div class="project-box project-box--upcoming reveal" aria-disabled="true">
+          <div class="project-thumb">
+            <img src="./assests/titlecard.png" alt="Upcoming project placeholder" loading="lazy">
+          </div>
           <h3>Upcoming Project</h3>
           <p>This project is currently in development. More details coming soon.</p>
-        </a>
+          <span class="project-link project-link--muted">Coming soon</span>
+        </div>
 
-        <a href="#" class="project-box reveal">
-          <img src="./assests/titlecard.png" alt="Upcoming Project Screenshot" style="width: 100%; border-radius: 8px; margin-bottom: 12px;">
+        <div class="project-box project-box--upcoming reveal" aria-disabled="true">
+          <div class="project-thumb">
+            <img src="./assests/titlecard.png" alt="Upcoming project placeholder" loading="lazy">
+          </div>
           <h3>Upcoming Project</h3>
           <p>This project is currently in development. More details coming soon.</p>
-        </a>
+          <span class="project-link project-link--muted">Coming soon</span>
+        </div>
 
       </div>
-    </div>
+    </section>
 
     <!-- ==== Footer ==== -->
     <footer class="footer">
       <p>&copy; 2025 Liybie R. Paragatos. All rights reserved.</p>
     </footer>
-  </div>
+  </main>
+
+  <!-- ==== Back to Top Button ==== -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
 
   <!-- ====  JavaScript ==== -->
   <script src="./js/index.js"></script>
 
 </body>
 </html>
-
