@@ -1,31 +1,88 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // === Section highlighting on scroll ===
-    const sections = document.querySelectorAll('.section');
+    const sections = document.querySelectorAll('main .section');
     const links = document.querySelectorAll('.links a');
+    const dots = document.querySelectorAll('.section-dot');
 
-    // Updates active link based on scroll position
     function changeLinkState() {
-        let index = sections.length;
-        // Loop backwards through sections to find the one currently in view
-        while (--index && window.scrollY + 100 < sections[index].offsetTop);
-        
-        // Remove 'active' class from all links
+        const probe = window.innerHeight * 0.34;
+        let index = 0;
+        sections.forEach((section, i) => {
+            if (section.getBoundingClientRect().top <= probe) index = i;
+        });
+
         links.forEach(link => link.classList.remove('active'));
-        
-        // Add 'active' class to the current link
         if (index >= 0 && index < links.length) {
             links[index].classList.add('active');
         }
+
+        dots.forEach((dot, i) => {
+            const on = i === index;
+            dot.classList.toggle('active', on);
+            if (on) dot.setAttribute('aria-current', 'true');
+            else dot.removeAttribute('aria-current');
+        });
     }
 
-    // === Navigation elements ===
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('nav-links');
-
-    // === Back to top button ===
     const backToTop = document.getElementById('back-to-top');
+    const themeToggle = document.getElementById('theme-toggle');
 
-    // Combined scroll handler, throttled with requestAnimationFrame
+    function applyTheme(theme, persist) {
+        document.documentElement.setAttribute('data-theme', theme);
+        if (persist) localStorage.setItem('theme', theme);
+        const light = theme === 'light';
+        if (themeToggle) {
+            themeToggle.setAttribute('aria-pressed', String(light));
+            themeToggle.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+        }
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', light ? '#f4f1ea' : '#070829');
+    }
+
+    applyTheme(document.documentElement.getAttribute('data-theme') || 'dark', false);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            applyTheme(next, true);
+        });
+    }
+
+    const emailOpen = document.getElementById('email-open');
+    const contactDialog = document.getElementById('contact-dialog');
+    const contactEmail = document.getElementById('contact-email');
+    const contactCopy = document.getElementById('contact-copy');
+    const contactClose = document.getElementById('contact-close');
+    let copyTimer;
+
+    function copyEmail() {
+        if (!contactEmail || !contactCopy) return;
+        const address = contactEmail.textContent.trim();
+        const markCopied = () => {
+            contactCopy.textContent = 'Copied';
+            clearTimeout(copyTimer);
+            copyTimer = setTimeout(() => {
+                contactCopy.textContent = 'Copy';
+            }, 1600);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(address).then(markCopied).catch(() => {});
+        }
+    }
+
+    if (emailOpen && contactDialog) {
+        emailOpen.addEventListener('click', () => {
+            if (contactCopy) contactCopy.textContent = 'Copy';
+            contactDialog.showModal();
+        });
+        contactClose.addEventListener('click', () => contactDialog.close());
+        contactDialog.addEventListener('click', (event) => {
+            if (event.target === contactDialog) contactDialog.close();
+        });
+        if (contactCopy) contactCopy.addEventListener('click', copyEmail);
+    }
+
     let ticking = false;
     function onScroll() {
         if (!ticking) {
@@ -40,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initialize on page load and listen for scroll
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -50,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // === Smooth scroll for anchor links ===
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', e => {
             const targetId = anchor.getAttribute('href');
@@ -58,22 +113,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = document.querySelector(targetId);
             if (!target) return;
             e.preventDefault();
-            // Scroll smoothly to the section
             target.scrollIntoView({ behavior: 'smooth' });
-            // Close the mobile menu after navigating
-            navLinks.classList.remove('open');
-            hamburger.setAttribute('aria-expanded', 'false');
+            if (navLinks) navLinks.classList.remove('open');
+            if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
         });
     });
 
-    // === Hamburger menu toggle for mobile navigation ===
-    // Toggle mobile nav visibility on hamburger click
-    hamburger.addEventListener('click', () => {
-        const isOpen = navLinks.classList.toggle('open');
-        hamburger.setAttribute('aria-expanded', String(isOpen));
-    });
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+        });
+    }
 
-    // === Typewriter effect for dynamic text ===
     const typewriter = document.getElementById("typewriter");
     const texts = [
         "Aspiring Full Stack Developer",
@@ -81,50 +133,43 @@ document.addEventListener('DOMContentLoaded', () => {
         "Coding Since 2023"
     ];
 
-    let index = 0;          // Position in the current text
-    let isDeleting = false; // Flag for deleting state
-    let count = 0;          // Index of current phrase
-    const speed = 100;      // Typing speed
-    const pause = 1500;     // Pause after full text is typed
+    let index = 0;
+    let isDeleting = false;
+    let count = 0;
+    const speed = 100;
+    const pause = 1500;
 
-    // Function to handle typing and deleting animation
     function type() {
-        const current = texts[count % texts.length]; // Get current phrase
-        const visibleText = current.substring(0, index); // Get visible part
+        const current = texts[count % texts.length];
+        const visibleText = current.substring(0, index);
 
         if (typewriter) {
             typewriter.innerHTML = `<span>${visibleText}</span><span class="cursor"></span>`;
         }
 
-        // When text is fully typed, pause then start deleting
         if (!isDeleting && index === current.length) {
             isDeleting = true;
             setTimeout(type, pause);
-        } 
-        // When text is fully deleted, move to next phrase
-        else if (isDeleting && index === 0) {
+        } else if (isDeleting && index === 0) {
             isDeleting = false;
             count++;
             setTimeout(type, 300);
-        } 
-        // Typing or deleting characters
-        else {
+        } else {
             index += isDeleting ? -1 : 1;
             setTimeout(type, isDeleting ? speed / 2 : speed);
         }
     }
 
-    // Start the typewriter animation
     type();
 });
-// === Hide preloader after page load ===
+
 window.addEventListener('load', () => {
   const preloader = document.getElementById('preloader');
   if (preloader) {
     preloader.classList.add('hidden');
   }
 });
-// ==== Scroll Reveal Animation ====
+
 document.addEventListener("DOMContentLoaded", () => {
   const reveals = document.querySelectorAll('.reveal');
 
@@ -132,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
-        observer.unobserve(entry.target); // optional: remove if you want repeat on scroll
+        observer.unobserve(entry.target);
       }
     });
   }, {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <!-- Basic HTML Setup DO NOT REMOVE IT WILL COLLAPES MOBILE VIEW -->
   <meta charset="UTF-8" />
@@ -20,6 +20,17 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="./assests/lplogo.png" />
 
+  <!-- Apply saved theme before paint -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var theme = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- CSS -->
   <link rel="stylesheet" href="./css/index.css" />
 </head>
@@ -39,6 +50,22 @@
   <!-- ==== Aurora Background ==== -->
   <div class="aurora"></div>
 
+  <!-- ==== Section dots ==== -->
+  <nav class="section-dots" aria-label="Section navigation">
+    <a href="#about-me" class="section-dot active" aria-label="About Me">
+      <span class="dot-mark" aria-hidden="true"></span>
+      <span class="dot-label">About</span>
+    </a>
+    <a href="#portfolio" class="section-dot" aria-label="Education and Experiences">
+      <span class="dot-mark" aria-hidden="true"></span>
+      <span class="dot-label">Experience</span>
+    </a>
+    <a href="#projects-list" class="section-dot" aria-label="Projects">
+      <span class="dot-mark" aria-hidden="true"></span>
+      <span class="dot-label">Projects</span>
+    </a>
+  </nav>
+
   <!-- ==== Banner/Navbar Section ==== -->
   <header class="banner">
     <div class="logo">
@@ -47,13 +74,24 @@
       </a>
     </div>
 
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
-
     <nav class="links" id="nav-links" aria-label="Primary">
       <a href="#about-me" class="link-about-me">About Me</a>
       <a href="#portfolio" class="link-portfolio">Education &amp; Experiences</a>
       <a href="#projects-list" class="link-experience">Projects</a>
     </nav>
+
+    <div class="banner-tools">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+        <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 14.5A8.5 8.5 0 1 1 9.5 3 7 7 0 0 0 21 14.5z"></path>
+        </svg>
+      </button>
+    </div>
   </header>
 
   <!-- ==== Main Content Wrapper ==== -->
@@ -62,7 +100,8 @@
     <!-- ==== About Me Section ==== -->
     <section id="about-me" class="section about-layout reveal">
       <div class="about-photo">
-        <img src="./assests/myPhoto.png" alt="Portrait of Liybie Paragatos" />
+        <img class="photo-dark" src="./assests/2.png" alt="Portrait of Liybie Paragatos" />
+        <img class="photo-light" src="./assests/1.png" alt="" />
       </div>
 
       <div class="about-text">
@@ -80,154 +119,209 @@
 
         <div class="hero-cta">
           <a href="#projects-list" class="btn btn-primary">View My Work</a>
-          <a href="mailto:paragatosliybie@gmail.com" class="btn btn-secondary">Get in Touch</a>
         </div>
 
         <div class="social-icons">
           <a href="https://www.linkedin.com/in/liybie-paragatos-0a14b32b9/" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <img src="./assests/linkedin.png" alt="" />
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
           </a>
-          <a href="mailto:paragatosliybie@gmail.com" aria-label="Email">
-            <img src="./assests/email.png" alt="" />
-          </a>
+          <button type="button" class="email-open" id="email-open" aria-label="Email" aria-haspopup="dialog">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5L4 8V6l8 5 8-5v2z"/></svg>
+          </button>
           <a href="https://github.com/Liybie" target="_blank" rel="noopener" aria-label="GitHub">
-            <img src="./assests/github.png" alt="" />
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12.02c0 5.1 3.29 9.43 7.86 10.96.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.2 1.77 1.2 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.41.36.78 1.07.78 2.16 0 1.56-.01 2.82-.01 3.2 0 .31.21.67.8.56A10.52 10.52 0 0 0 23.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>
           </a>
           <a href="https://www.facebook.com/Liybie.Paragatos.R" target="_blank" rel="noopener" aria-label="Facebook">
-            <img src="./assests/facebook.png" alt="" />
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2S1.86 6.48 1.86 12.07c0 5.02 3.66 9.18 8.44 9.93v-7.02H7.9v-2.91h2.4V9.84c0-2.38 1.42-3.69 3.59-3.69 1.04 0 2.13.19 2.13.19v2.35h-1.2c-1.18 0-1.55.74-1.55 1.49v1.79h2.64l-.42 2.91h-2.22V22c4.78-.75 8.44-4.91 8.44-9.93z"/></svg>
           </a>
         </div>
       </div>
     </section>
 
     <!-- ==== Portfolio Section (Education & Experience) ==== -->
-    <section id="portfolio" class="section reveal">
-      <div class="timeline">
+    <section id="portfolio" class="section">
+      <header class="section-head reveal">
+        <span class="section-kicker">Background</span>
+        <h2>Education &amp; Experiences</h2>
+      </header>
 
-        <div class="timeline-separator reveal">Educational Background</div>
+      <div class="exp-board">
+        <h3 class="exp-label">Education</h3>
 
-        <div class="timeline-block reveal">
-          <div class="timeline-content">
-            <h3>Senior High School</h3>
-            <p><strong>School:</strong> Jesus Dela Peña National High School</p>
-            <p><strong>Strand:</strong> TVL-Programming</p>
-            <p><strong>Skills Learned:</strong> HTML, CSS, VB.NET, Python, MySQL</p>
-            <span class="timeline-date">2022 – 2024</span>
+        <article class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-index">01</span>
+            <span class="exp-year">2022 — 2024</span>
           </div>
-        </div>
-
-        <div class="timeline-block reveal">
-          <div class="timeline-content">
-            <h3>College</h3>
-            <p><strong>School:</strong> National University Manila</p>
-            <p><strong>Course:</strong> BSIT – Mobile and Web Application</p>
-            <p><strong>Skills Learned:</strong> Java, JavaScript, UI/UX, OOP</p>
-            <span class="timeline-date">2024 – Present</span>
+          <div class="exp-body">
+            <h4>Senior High School</h4>
+            <p class="exp-org">Jesus Dela Peña National High School</p>
+            <p class="exp-detail">TVL-Programming</p>
+            <ul class="chips">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>VB.NET</li>
+              <li>Python</li>
+              <li>MySQL</li>
+            </ul>
           </div>
-        </div>
+        </article>
 
-        <div class="timeline-separator reveal">Experiences</div>
-
-        <div class="timeline-block reveal">
-          <div class="timeline-content">
-            <h3>Freelance Editor</h3>
-            <p><strong>Type:</strong> Self-employed</p>
-            <p><strong>Role:</strong> Remote video editing and content polishing for clients</p>
-            <span class="timeline-date">Jul 2020 – 2021</span>
+        <article class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-index">02</span>
+            <span class="exp-year">2024 — Present</span>
           </div>
-        </div>
-
-        <div class="timeline-block reveal">
-          <div class="timeline-content">
-            <h3>Student Trainee – Internship</h3>
-            <p><strong>Company:</strong> Digital Arts Technology Training Center Inc.</p>
-            <p><strong>Skills Gained:</strong> Java Basics and Looping</p>
-            <p><strong>Experience:</strong> Learned Java basics and built a calculator app using NetBeans</p>
-            <span class="timeline-date">Apr – May 2024</span>
+          <div class="exp-body">
+            <h4>College</h4>
+            <p class="exp-org">National University Manila</p>
+            <p class="exp-detail">BSIT – Mobile and Web Application</p>
+            <ul class="chips">
+              <li>Java</li>
+              <li>JavaScript</li>
+              <li>UI/UX</li>
+              <li>OOP</li>
+            </ul>
           </div>
-        </div>
+        </article>
 
-        <div class="timeline-block reveal">
-          <div class="timeline-content">
-            <h3>Student Participant – Ateneo NSTP</h3>
-            <p><strong>Institution:</strong> Ateneo de Manila University</p>
-            <p><strong>Skills Gained:</strong> Advanced MySQL (DML, Joins) and Python (loops, file handling)</p>
-            <span class="timeline-date">Mar – Apr 2024</span>
+        <h3 class="exp-label">Experiences</h3>
+
+        <article class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-index">03</span>
+            <span class="exp-year">Jul 2020 — 2021</span>
           </div>
-        </div>
+          <div class="exp-body">
+            <h4>Freelance Editor</h4>
+            <p class="exp-org">Self-employed</p>
+            <p class="exp-detail">Remote video editing and content polishing for clients.</p>
+          </div>
+        </article>
+
+        <article class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-index">04</span>
+            <span class="exp-year">Apr — May 2024</span>
+          </div>
+          <div class="exp-body">
+            <h4>Student Trainee – Internship</h4>
+            <p class="exp-org">Digital Arts Technology Training Center Inc.</p>
+            <p class="exp-detail">Learned Java basics and built a calculator app using NetBeans.</p>
+            <ul class="chips">
+              <li>Java</li>
+              <li>NetBeans</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="exp-item reveal">
+          <div class="exp-meta">
+            <span class="exp-index">05</span>
+            <span class="exp-year">Mar — Apr 2024</span>
+          </div>
+          <div class="exp-body">
+            <h4>Student Participant – Ateneo NSTP</h4>
+            <p class="exp-org">Ateneo de Manila University</p>
+            <p class="exp-detail">Advanced MySQL and Python, including joins, loops, and file handling.</p>
+            <ul class="chips">
+              <li>MySQL</li>
+              <li>Python</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </section>
 
     <!-- ==== Projects Section ==== -->
-    <section id="projects-list" class="section reveal">
-      <div class="timeline-separator reveal">Projects</div>
+    <section id="projects-list" class="section">
+      <header class="section-head reveal">
+        <span class="section-kicker">Selected work</span>
+        <h2>Projects</h2>
+      </header>
+
       <div class="projects-list">
+
+        <a href="https://veyoung.vercel.app/" target="_blank" rel="noopener" class="project-box reveal">
+          <div class="project-thumb">
+            <img src="./assests/veyoung.jpg" alt="VeYoung Beauty website screenshot" loading="lazy">
+          </div>
+          <div class="project-copy">
+            <span class="project-kicker">Website</span>
+            <h3>VeYoung Beauty</h3>
+            <p>Beauty and wellness site for a Metro Manila clinic, with treatments, branches, reviews, and booking.</p>
+            <span class="project-link">Visit site <span aria-hidden="true">&rarr;</span></span>
+          </div>
+        </a>
+
+        <a href="https://caffiene-co.vercel.app/" target="_blank" rel="noopener" class="project-box reveal">
+          <div class="project-thumb">
+            <img src="./assests/caffeine.jpg" alt="Caffeine Co. website screenshot" loading="lazy">
+          </div>
+          <div class="project-copy">
+            <span class="project-kicker">Website</span>
+            <h3>Caffeine Co.</h3>
+            <p>Artisan coffee house site with a specialty menu, visit details, and a first-visit welcome offer.</p>
+            <span class="project-link">Visit site <span aria-hidden="true">&rarr;</span></span>
+          </div>
+        </a>
 
         <a href="https://www.figma.com/proto/3hrLGAWJG6sVgB401ISKnb/Medelink?node-id=1-2&starting-point-node-id=1%3A2" target="_blank" rel="noopener" class="project-box reveal">
           <div class="project-thumb">
             <img src="./assests/medilink.png" alt="Medilink project screenshot" loading="lazy">
           </div>
-          <h3>Medilink</h3>
-          <p>UI/UX prototype Figma design for a health service app developed for a hackathon entry.</p>
-          <span class="project-link">View prototype &rarr;</span>
+          <div class="project-copy">
+            <span class="project-kicker">UI/UX</span>
+            <h3>Medilink</h3>
+            <p>Health service prototype designed in Figma for a hackathon entry.</p>
+            <span class="project-link">View prototype <span aria-hidden="true">&rarr;</span></span>
+          </div>
         </a>
 
         <a href="https://github.com/Liybie/Simple-Dental-Management-System/tree/main" target="_blank" rel="noopener" class="project-box reveal">
           <div class="project-thumb">
             <img src="./assests/dentassist.png" alt="DentAssist project screenshot" loading="lazy">
           </div>
-          <h3>DentAssist</h3>
-          <p>A simple dental management system with patient tracking and appointment management developed by our group Xnovators.</p>
-          <span class="project-link">View on GitHub &rarr;</span>
+          <div class="project-copy">
+            <span class="project-kicker">Web app</span>
+            <h3>DentAssist</h3>
+            <p>Dental management system for patient tracking and appointments, built with group Xnovators.</p>
+            <span class="project-link">View on GitHub <span aria-hidden="true">&rarr;</span></span>
+          </div>
         </a>
 
         <a href="https://liybie.github.io/TECHCORE/" target="_blank" rel="noopener" class="project-box reveal">
           <div class="project-thumb">
             <img src="./assests/techcore.png" alt="TechCore project screenshot" loading="lazy">
           </div>
-          <h3>TechCore</h3>
-          <p>An informative simple website explaining the components of computer hardware.</p>
-          <span class="project-link">Visit site &rarr;</span>
+          <div class="project-copy">
+            <span class="project-kicker">Website</span>
+            <h3>TechCore</h3>
+            <p>A clear walkthrough of computer hardware components.</p>
+            <span class="project-link">Visit site <span aria-hidden="true">&rarr;</span></span>
+          </div>
         </a>
-
-        <div class="project-box project-box--upcoming reveal" aria-disabled="true">
-          <div class="project-thumb">
-            <img src="./assests/titlecard.png" alt="Upcoming project placeholder" loading="lazy">
-          </div>
-          <h3>Upcoming Project</h3>
-          <p>This project is currently in development. More details coming soon.</p>
-          <span class="project-link project-link--muted">Coming soon</span>
-        </div>
-
-        <div class="project-box project-box--upcoming reveal" aria-disabled="true">
-          <div class="project-thumb">
-            <img src="./assests/titlecard.png" alt="Upcoming project placeholder" loading="lazy">
-          </div>
-          <h3>Upcoming Project</h3>
-          <p>This project is currently in development. More details coming soon.</p>
-          <span class="project-link project-link--muted">Coming soon</span>
-        </div>
-
-        <div class="project-box project-box--upcoming reveal" aria-disabled="true">
-          <div class="project-thumb">
-            <img src="./assests/titlecard.png" alt="Upcoming project placeholder" loading="lazy">
-          </div>
-          <h3>Upcoming Project</h3>
-          <p>This project is currently in development. More details coming soon.</p>
-          <span class="project-link project-link--muted">Coming soon</span>
-        </div>
 
       </div>
     </section>
 
     <!-- ==== Footer ==== -->
     <footer class="footer">
-      <p>&copy; 2025 Liybie R. Paragatos. All rights reserved.</p>
+      <p>&copy; 2026 Liybie R. Paragatos. All rights reserved.</p>
     </footer>
   </main>
 
   <!-- ==== Back to Top Button ==== -->
   <button id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+
+  <dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-title">
+    <button type="button" class="contact-close" id="contact-close" aria-label="Close">&times;</button>
+    <p class="contact-intro" id="contact-title">Hi, I'm Liybie. Reach out if you'd like to talk about a project or opportunity.</p>
+    <div class="contact-row">
+      <p class="contact-email" id="contact-email">paragatosliybie@gmail.com</p>
+      <button type="button" class="contact-copy" id="contact-copy">Copy</button>
+    </div>
+  </dialog>
 
   <!-- ====  JavaScript ==== -->
   <script src="./js/index.js"></script>
